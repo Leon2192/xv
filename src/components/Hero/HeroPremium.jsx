@@ -81,7 +81,7 @@ const Hero = () => {
       {/* Audio autoplay + loop */}
       <audio
         ref={audioRef}
-        src="/cancion.mp3"
+        src="/cancion-prem.mp3"
         preload="auto"
         autoPlay
         loop
