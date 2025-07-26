@@ -49,7 +49,7 @@ const Confirm = () => {
           color: "#222",
         }}
       >
-        Espero que seas parte de esta gran celebración. Confirmame tu asistencia!
+        Espero que seas parte de esta gran celebración. ¡Confirmame tu asistencia!
       </Typography>
 
       {/* Botón */}
