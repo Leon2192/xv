@@ -39,7 +39,7 @@ const Gallery = () => {
   });
 
   return (
-    <Box ref={ref} sx={{ py: 8, px: 2, maxWidth: "1200px", mx: "auto" }}>
+    <Box ref={ref} sx={{ py: 8, px: 2, backgroundColor: "#9a64ea", maxWidth: "1200px", mx: "auto" }}>
       <Typography
         variant="h3"
         sx={{

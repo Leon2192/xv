@@ -59,24 +59,26 @@ const Gift = () => {
           </Typography>
 
           <Button
-            variant="contained"
-            onClick={handleOpen}
-            sx={{
-              borderRadius: 999,
-              px: 4,
-                fontFamily: "'Catchy Mager', cursive",
-              backgroundColor: "#d1c4e9",
-              color: "#4a148c",
-              boxShadow: "none",
-              "&:hover": {
-                backgroundColor: "#fff",
-                border: "2px solid #d1c4e9",
-                color: "#4a148c",
-              },
-            }}
-          >
-            Ver datos bancarios
-          </Button>
+  variant="contained"
+  onClick={handleOpen}
+  sx={{
+    borderRadius: 999,
+    px: 4,
+    fontFamily: "'Catchy Mager', cursive",
+    backgroundColor: "#9a64ea",
+    color: "#fff",
+    boxShadow: "none",
+    transition: "all 0.3s ease",
+    "&:hover": {
+      backgroundColor: "#fff",
+      border: "2px solid #9a64ea",
+      color: "#9a64ea",
+    },
+  }}
+>
+  Ver datos bancarios
+</Button>
+
         </Box>
       </Fade>
 

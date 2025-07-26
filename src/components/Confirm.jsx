@@ -1,5 +1,5 @@
 import { Box, Typography, Button } from "@mui/material";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckIcon from '@mui/icons-material/Check';
 
 const Confirm = () => {
   return (
@@ -17,13 +17,13 @@ const Confirm = () => {
       }}
     >
 
-      <CheckCircleIcon
-        sx={{
-          fontSize: { xs: 60, md: 80 },
-          color: "#43A047",
-          mb: 2,
-        }}
-      />
+<CheckIcon
+  sx={{
+    fontSize: { xs: 60, md: 80 },
+    color: "#43A047",
+    mb: 2,
+  }}
+/>
 
   
       <Typography
@@ -53,28 +53,30 @@ const Confirm = () => {
       </Typography>
 
       {/* Botón */}
-      <Button
-        component="a"
-        href="https://docs.google.com/forms/d/e/1FAIpQLSelY0QMb2Pdi7bOb19tFv-Q42qepyMiIHq9qaPUBfGh_Qr8Lw/viewform?fbzx=4030668355714172330"
-        target="_blank"
-        rel="noopener noreferrer"
-        variant="contained"
-        sx={{
-          borderRadius: 999,
-          px: 4,
-          backgroundColor: "#b2ebf2",
-            fontFamily: "'Catchy Mager', cursive",
-          color: "#004d40",
-          boxShadow: "none",
-          "&:hover": {
-            backgroundColor: "#fff",
-            border: "2px solid #b2ebf2",
-            color: "#004d40",
-          },
-        }}
-      >
-        Confirmar asistencia
-      </Button>
+    <Button
+  component="a"
+  href="https://docs.google.com/forms/d/e/1FAIpQLSelY0QMb2Pdi7bOb19tFv-Q42qepyMiIHq9qaPUBfGh_Qr8Lw/viewform?fbzx=4030668355714172330"
+  target="_blank"
+  rel="noopener noreferrer"
+  variant="contained"
+  sx={{
+    borderRadius: 999,
+    px: 4,
+    fontFamily: "'Catchy Mager', cursive",
+    backgroundColor: "#9a64ea",
+    color: "#fff",
+    boxShadow: "none",
+    transition: "all 0.3s ease",
+    "&:hover": {
+      backgroundColor: "#fff",
+      border: "2px solid #9a64ea",
+      color: "#9a64ea",
+    },
+  }}
+>
+  Confirmar asistencia
+</Button>
+
     </Box>
   );
 };

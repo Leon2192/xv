@@ -83,24 +83,26 @@ const InfoEvent = () => {
                 rel="noopener noreferrer"
                 style={{ textDecoration: "none" }}
               >
-                <Button
-                  variant="contained"
-                  sx={{
-                    borderRadius: 999,
-                    fontFamily: "'Catchy Mager', cursive",
-                    px: 4,
-                    backgroundColor: "#d1c4e9",
-                    color: "#4a148c",
-                    boxShadow: "none",
-                    "&:hover": {
-                      backgroundColor: "#fff",
-                      border: "2px solid #d1c4e9",
-                      color: "#4a148c",
-                    },
-                  }}
-                >
-                  Llegar al salón
-                </Button>
+              <Button
+  variant="contained"
+  sx={{
+    borderRadius: 999,
+    fontFamily: "'Catchy Mager', cursive",
+    px: 4,
+    backgroundColor: "#9a64ea",  // color principal
+    color: "#fff",               // texto en blanco para contraste
+    boxShadow: "none",
+    transition: "all 0.3s ease",
+    "&:hover": {
+      backgroundColor: "#fff",         // fondo blanco al pasar
+      border: "2px solid #9a64ea",     // borde con el mismo morado
+      color: "#9a64ea",                // texto morado
+    },
+  }}
+>
+  Llegar al salón
+</Button>
+
               </a>
             </Box>
           </Slide>

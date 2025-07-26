@@ -87,27 +87,28 @@ const Qr = () => {
     rel="noopener noreferrer"
     sx={{ textDecoration: "none" }}
   >
-    <Box
-      component="button"
-      sx={{
-        border: "2px solid #25D366",
-        color: "#25D366",
-        px: 3,
-        fontFamily: "'Catchy Mager', cursive",
-        py: 1,
-        borderRadius: "999px",
-        fontSize: "1rem",
-        fontWeight: 500,
-        backgroundColor: "transparent",
-        cursor: "pointer",
-        transition: "all 0.3s ease",
-        "&:hover": {
-          backgroundColor: "#25D36622",
-        },
-      }}
-    >
-      Ir al álbum
-    </Box>
+   <Box
+  component="button"
+  sx={{
+    border: "2px solid #9a64ea",
+    color: "#9a64ea",
+    px: 3,
+    py: 1,
+    fontFamily: "'Catchy Mager', cursive",
+    fontSize: "1rem",
+    fontWeight: 500,
+    borderRadius: "999px",
+    backgroundColor: "transparent",
+    cursor: "pointer",
+    transition: "all 0.3s ease",
+    "&:hover": {
+      backgroundColor: "#9a64ea22", // mismo morado con transparencia
+    },
+  }}
+>
+  Ir al álbum
+</Box>
+
   </Box>
 </Box>
 
