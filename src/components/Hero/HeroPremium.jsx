@@ -1,32 +1,33 @@
-import {
-  Box,
-  useMediaQuery,
-  useTheme,
-  IconButton,
-} from "@mui/material";
+import { useRef, useState, useEffect } from "react";
+import { Box, useMediaQuery, useTheme, IconButton } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import PauseIcon from "@mui/icons-material/Pause";
-import { useRef, useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 const Hero = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
   const desktopImage = "/images/15/portada.jpeg";
   const mobileImage = "/images/15/portadacelu.jpeg";
 
+  // ref para el elemento audio
   const audioRef = useRef(null);
-  // Arrancamos en 'playing'
+  // estado para el icono/play–pause
   const [isPlaying, setIsPlaying] = useState(true);
 
-  // Al montar, forzamos la reproducción
+  // ref de intersección, renombrado a avoid collision
+  const { ref: viewRef, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
+  // arrancamos la música al montar
   useEffect(() => {
-    const audio = audioRef.current;
-    if (audio) {
-      audio.play().catch((err) => {
-        console.warn("Autoplay falló:", err);
+    if (audioRef.current) {
+      audioRef.current.play().catch(() => {
+        // si el autoplay falla
+        setIsPlaying(false);
       });
     }
   }, []);
@@ -37,23 +38,15 @@ const Hero = () => {
 
     if (isPlaying) {
       audio.pause();
+      setIsPlaying(false);
     } else {
-      audio.play().catch((error) => {
-        console.error("No se pudo reproducir el audio:", error);
-      });
+      audio.play().then(() => setIsPlaying(true));
     }
-
-    setIsPlaying(!isPlaying);
   };
-
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-  });
 
   return (
     <Box
-      ref={ref}
+      ref={viewRef}
       sx={{
         position: "relative",
         height: "100vh",
@@ -78,19 +71,17 @@ const Hero = () => {
           color: "#000",
           width: 50,
           height: 50,
-          "&:hover": {
-            backgroundColor: "rgba(255,255,255,0.9)",
-          },
+          "&:hover": { backgroundColor: "rgba(255,255,255,0.9)" },
           zIndex: 3,
         }}
       >
         {isPlaying ? <PauseIcon /> : <MusicNoteIcon />}
       </IconButton>
 
-      {/* Audio arranca en autoplay */}
+      {/* Audio autoplay + loop */}
       <audio
         ref={audioRef}
-        src="/song.mp3"
+        src="/cancion.mp3"
         preload="auto"
         autoPlay
         loop
@@ -106,7 +97,7 @@ const Hero = () => {
           zIndex: 2,
           animation: "bounce 2s infinite",
           "@keyframes bounce": {
-            "0%, 20%, 50%, 80%, 100%": {
+            "0%,20%,50%,80%,100%": {
               transform: "translateX(-50%) translateY(0)",
             },
             "40%": {
