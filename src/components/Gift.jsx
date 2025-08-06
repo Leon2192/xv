@@ -6,8 +6,10 @@ import {
   Fade,
   Backdrop,
   Divider,
+  IconButton,
 } from "@mui/material";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -53,32 +55,31 @@ const Gift = () => {
               mb: 4,
             }}
           >
-           Tu presencia es el mejor regalo que puedo recibir.
-<br />
-       Pero si querés tener un gesto especial, te dejo los datos de mi cuenta bancaria 
+            Tu presencia es el mejor regalo que puedo recibir.
+            <br />
+            Pero si querés tener un gesto especial, te dejo los datos de mi cuenta bancaria
           </Typography>
 
           <Button
-  variant="contained"
-  onClick={handleOpen}
-  sx={{
-    borderRadius: 999,
-    px: 4,
-    fontFamily: "'Catchy Mager', cursive",
-    backgroundColor: "#9a64ea",
-    color: "#fff",
-    boxShadow: "none",
-    transition: "all 0.3s ease",
-    "&:hover": {
-      backgroundColor: "#fff",
-      border: "2px solid #9a64ea",
-      color: "#9a64ea",
-    },
-  }}
->
-  Ver datos bancarios
-</Button>
-
+            variant="contained"
+            onClick={handleOpen}
+            sx={{
+              borderRadius: 999,
+              px: 4,
+              fontFamily: "'Catchy Mager', cursive",
+              backgroundColor: "#9a64ea",
+              color: "#fff",
+              boxShadow: "none",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#fff",
+                border: "2px solid #9a64ea",
+                color: "#9a64ea",
+              },
+            }}
+          >
+            Ver datos bancarios
+          </Button>
         </Box>
       </Fade>
 
@@ -101,17 +102,44 @@ const Gift = () => {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              bgcolor: "#fff",
-              borderRadius: 2,
+              bgcolor: "#fdfaff",
+              borderRadius: 3,
               boxShadow: 24,
               p: 4,
-              maxWidth: 400,
+              maxWidth: 600,
+              width: "90%",
               textAlign: "center",
             }}
           >
+            {/* Botón cerrar */}
+            <IconButton
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                top: 8,
+                right: 8,
+                color: "#666",
+                "&:hover": {
+                  color: "#9a64ea",
+                  backgroundColor: "transparent",
+                },
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+
+            <CardGiftcardIcon
+              sx={{
+                fontSize: 60,
+                color: "#9a64ea",
+                mb: 2,
+              }}
+            />
+
             <Typography variant="h6" fontWeight="bold" gutterBottom>
               Datos Bancarios
             </Typography>
+
             <Typography variant="body1" gutterBottom>
               Nombre del Titular: Nombre Apellido
               <br />
@@ -124,9 +152,15 @@ const Gift = () => {
               Banco Galicia
             </Typography>
 
-            <Typography variant="h6" fontWeight="bold" gutterBottom mt={3}>
+            <Typography
+              variant="h6"
+              fontWeight="bold"
+              gutterBottom
+              sx={{ mt: 3 }}
+            >
               Lista de Regalos
             </Typography>
+
             <Typography variant="body1">Mica XV</Typography>
           </Box>
         </Fade>
