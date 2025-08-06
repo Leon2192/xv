@@ -1,4 +1,11 @@
-import { Box, Grid, Typography, IconButton , Divider} from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  IconButton,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -6,16 +13,18 @@ import { useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
-import { Keyboard } from "swiper/modules";
+import { Keyboard, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/keyboard";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const images = [
   "/images/15/1.jpeg",
   "/images/15/5.jpeg",
-   "/images/15/15.jpg",
- "/images/15/153.jpg",
-    "/images/15/155.jpg",
+  "/images/15/15.jpg",
+  "/images/15/153.jpg",
+  "/images/15/155.jpg",
   "/images/15/154.jpg",
 ];
 
@@ -33,53 +42,92 @@ const Gallery = () => {
     setOpen(false);
   };
 
-  const { ref } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { ref } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Box ref={ref} sx={{ py: 8, px: 2, backgroundColor: "#9a64ea", maxWidth: "1200px", mx: "auto" }}>
+    <Box
+      ref={ref}
+      sx={{
+        py: 8,
+        px: 2,
+        backgroundColor: "#9a64ea",
+        maxWidth: "1200px",
+        mx: "auto",
+      }}
+    >
       <Typography
         variant="h3"
         sx={{
           mb: 4,
           textAlign: "center",
-        fontFamily: "'Catchy Mager', cursive",
+          fontFamily: "'Catchy Mager', cursive",
           fontWeight: "bold",
           color: "#333",
         }}
       >
         Galería
       </Typography>
+      
+      {isMobile ? (
+        <Swiper
+          modules={[Keyboard, Navigation, Pagination]}
+          navigation={!isMobile} // <== solo desktop
+        
+          pagination={{ clickable: true }}
+          keyboard
+          spaceBetween={12}
+          slidesPerView={1}
+          style={{ width: "100%" }}
+        >
+          {images.map((src, index) => (
+            <SwiperSlide key={index}>
+              <Box
+                component="img"
+                src={src}
+                alt={`Imagen ${index + 1}`}
+                onClick={() => handleOpen(index)}
+                sx={{
+                  width: "100%",
+                  height: 240,
+                  objectFit: "cover",
+                  borderRadius: 2,
+                  cursor: "pointer",
+                }}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : (
+        // DESKTOP: Grid
+        <Grid container spacing={2}>
+          {images.map((src, index) => (
+            <Grid item key={index} xs={12} sm={6} md={6}>
+              <Box
+                component="img"
+                src={src}
+                alt={`Imagen ${index + 1}`}
+                onClick={() => handleOpen(index)}
+                sx={{
+                  width: "100%",
+                  height: 250,
+                  objectFit: "cover",
+                  borderRadius: 2,
+                  cursor: "pointer",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  "&:hover": {
+                    transform: "scale(1.05)",
+                    boxShadow: 3,
+                  },
+                }}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      )}
 
-      <Grid container spacing={2} justifyContent="center">
-        {images.map((src, index) => (
-          <Grid item key={index} xs={12} md={6} lg={6} xl={6}>
-
-            <Box
-              component="img"
-              src={src}
-              alt={`Imagen ${index + 1}`}
-              onClick={() => handleOpen(index)}
-              sx={{
-                width: "100%",
-                height: { xs: 160, sm: 220, md: 250 },
-                objectFit: "cover",
-                borderRadius: 2,
-                cursor: "pointer",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                "&:hover": {
-                  transform: "scale(1.05)",
-                  boxShadow: 3,
-                },
-              }}
-            />
-          </Grid>
-        ))}
-      </Grid>
-
-      {/* Modal lightbox */}
+      {/* MODAL LIGHTBOX */}
       {open && (
         <Box
           sx={{
@@ -104,7 +152,7 @@ const Gallery = () => {
               mx: "auto",
             }}
           >
-            {/* Botón cerrar */}
+            {/* Cerrar */}
             <CloseIcon
               onClick={handleClose}
               sx={{
@@ -121,7 +169,7 @@ const Gallery = () => {
               }}
             />
 
-            {/* Flecha izquierda */}
+            {/* Flechas lightbox */}
             <IconButton
               onClick={() => swiperRef.current?.slidePrev()}
               sx={{
@@ -139,7 +187,6 @@ const Gallery = () => {
               <ArrowBackIosNewIcon fontSize="small" />
             </IconButton>
 
-            {/* Flecha derecha */}
             <IconButton
               onClick={() => swiperRef.current?.slideNext()}
               sx={{
@@ -157,15 +204,13 @@ const Gallery = () => {
               <ArrowForwardIosIcon fontSize="small" />
             </IconButton>
 
-            {/* Swiper */}
+            {/* Swiper modal */}
             <Swiper
               initialSlide={startIndex}
               keyboard
               onSwiper={(swiper) => (swiperRef.current = swiper)}
               modules={[Keyboard]}
-              style={{
-                width: "100%",
-              }}
+              style={{ width: "100%" }}
             >
               {images.map((src, index) => (
                 <SwiperSlide key={index}>
@@ -186,8 +231,6 @@ const Gallery = () => {
           </Box>
         </Box>
       )}
-
-      
     </Box>
   );
 };

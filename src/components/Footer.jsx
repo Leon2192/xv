@@ -24,7 +24,7 @@ const Footer = () => {
           <Box display="flex" alignItems="center" mb={1}>
             <WhatsAppIcon sx={{ fontSize: 20, color: "#4caf50", mr: 1 }} />
             <Link
-              href="https://wa.me/541127682286"
+              href="https://wa.me/541135939460"
               target="_blank"
               underline="none"
               sx={{ color: "#009688", fontWeight: 500 }}
